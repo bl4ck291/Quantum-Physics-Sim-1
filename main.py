@@ -28,15 +28,12 @@ for i in range(N - 2):
 
 H = (-hbar ** 2 / (2 * m * d ** 2)) * T + V  # Creating the H matrix
 
-val, vec = np.linalg.eig(H)  # Finding eigenvalues(energies) and vectors(wavefunctions) and sorting them
-eng = np.sort(val)
-probability = vec ** 2
-# print(eng)
+values, vectors = np.linalg.eig(H)  # Finding eigenvalues(energies) and vectors(wavefunctions) and sorting them
+energies = np.sort(values)
+probability = vectors ** 2
 states = 3
-# eng = eng[0:states]
-z = np.argsort(val)
+z = np.argsort(values)
 z = z[0:states]
-energies = (val / val[0])
 
 plt.figure(figsize=(12, 8))  # Plotting
 for i in range(len(z)):
@@ -44,7 +41,7 @@ for i in range(len(z)):
     y = np.append(y, probability[:, z[i]])
     y = np.append(y, 0)
     y = np.insert(y, 0, 0)
-    plt.plot(r, y, lw=2, label=f"State: {i + 1}        Energy = {eng[i]}")
+    plt.plot(r, y, lw=2, label=f"State: {i + 1}        Energy = {energies[i]}")
     plt.xlabel('Distance from nucleus r', size=14)
     plt.ylabel('Electron probability $\psi^{2}$ ', size=14)
 
