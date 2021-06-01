@@ -20,11 +20,28 @@ for i in range(N - 2):
         elif np.abs(i - j) == 1:
             T[i, j] = 1
 
+
+def Vpot(x):                                      # Different methods for PE calculation
+    return -(e ** 2) / x
+
+
+def Vconstant(x):
+    return 1
+
+
+def Vlinear(x):
+    return x
+
+
+def Vquadratic(x):
+    return x ** 2
+
+
 V = np.zeros((N - 2) ** 2).reshape(N - 2, N - 2)  # Creating the PE matrix
 for i in range(N - 2):
     for j in range(N - 2):
         if i == j:
-            V[i, j] = -(e ** 2) / r[i + 1]
+            V[i, j] = Vpot(r[i + 1])
 
 H = (-hbar ** 2 / (2 * m * d ** 2)) * T + V  # Creating the H matrix
 
